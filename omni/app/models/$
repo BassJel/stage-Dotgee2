@@ -1,0 +1,60 @@
+require 'active_resource'
+
+class Issue < ActiveResource::Base
+  
+  self.site = "http://localhost:3000"
+  self.format = :xml
+  self.user = 'admin'
+  self.password = 'admin'
+
+ # class << self
+ #   attr_accessor :api_key
+ # end
+
+#  def save
+#    prefix_options[:api_key] = self.class.api_key
+#    super
+#  end
+end
+
+#Issue.site = 'http://localhost:300'
+
+#Issue.api_key = '471bea6d1c4452b82b57287a281ff04392ae4118'
+
+#iss = Issue.new(:field_1 => 'value 1')
+#iss.save
+
+# Retrieving issues
+issues = Issue.find(:all)
+puts issues.first.subject
+#puts issues.inspect
+
+# Retrieving an issues 
+#issue = Issue.find(1)
+#puts issue.description
+#puts issue.author.name
+
+# Creating an issue 
+issue = Issue.new(
+  :subject => 'REST API', 
+  :assigned_to_id => 1, 
+  :project_id => 1, 
+ # :custom_field_values => {'2' => 'Fixed'},
+  :status_id => 1,
+  :priority_id => 1,
+  :author_id => 1,
+)
+if issue.save
+  puts issue.id
+else
+  puts issue.errors.full_messages
+end
+
+# Updating  an issue
+issue = Issue.find(1)
+issue.subject = 'NEW ISSUE'
+issue.save
+
+# Deleting an issue
+issue = Issue.find(1)
+issue.destroy

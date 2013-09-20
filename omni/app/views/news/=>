@@ -1,0 +1,22 @@
+<% content_for :sidebar do %>
+  <%= render :file => "~/development/omni/app/views/layouts/sidebar.html.erb" %>
+<% end %>
+
+<% content_for :header do %>
+  <%= render :file => "~/development/omni/app/views/layouts/header.html.erb" %>
+<% end %>
+
+<div class="main">
+  <h1><u>News</u></h1>
+    <% @news.each do |news| %>
+      <h2><%= news.title %></h2>
+      <b><u>Projet:</u> </b><%= news.project%>
+      <br>
+      <b><u>Résumé:</u> </b><%= news.summary %>
+      <br>
+      <b><u>Description:</u> </b><%= news.description %>
+      <br>
+      <i> <%= news.author %>,
+      <%= news.created_on %></i>
+  <%end %>
+</div>

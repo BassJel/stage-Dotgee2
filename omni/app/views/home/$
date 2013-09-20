@@ -1,0 +1,11 @@
+<div> 
+  <%= @doc.text().to_html %>i
+</div>
+
+<div>
+   ----------- <br> -----------
+</div>
+
+<div>
+  <%= @doc2.text() %>
+</div>

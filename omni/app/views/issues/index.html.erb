@@ -1,0 +1,34 @@
+<% content_for :sidebar do %>
+  <%= render :file => "~/development/omni/app/views/layouts/sidebar.html.erb" %>
+<% end %>
+
+<% content_for :header do %>
+  <%= render :file => "~/development/omni/app/views/layouts/header.html.erb" %>
+<% end %>
+
+
+
+
+<div>
+  <h1><u>Issues</u></h1>
+    <% @issues.each do |issues| %>
+      <h2><%= issues.project_i %></h2>
+      <b><u>Tracker:</u> </b><%= issues.tracker%>
+      <br>
+      <b><u>Status:</u> </b><%= issues.status %>
+      <br>
+      <b><u>Priorité:</u> </b><%= issues.priority %>
+      <br>
+      <b><u>Auteur:</u> </b><%= issues.author_i %>
+      <br>
+      <b><u>Assigné à:</u> </b><%= issues.assigned_to %>
+      <br>
+      <b><u>Sujet:</u> </b><%= issues.subject %>
+      <br>
+      <b><u>Date de création:</u> </b><%= issues.start_date %>
+      <br>
+      <b><u>% réalisé:</u> </b><%= issues.done_ratio %>
+      <br>
+      <br>
+  <%end %>
+</div>

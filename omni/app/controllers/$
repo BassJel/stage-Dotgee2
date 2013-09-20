@@ -1,0 +1,45 @@
+require 'httparty'
+require 'nokogiri'
+require 'News'
+
+class HomeController < ActionController::Base
+  
+  include HTTParty
+  
+  def index
+    #response = HTTParty.get('http://localhost:3000/news.xml')
+    #data = response.parsed_response
+
+    %w[http://localhost:3000/issues.xml?assigned_to=me', 
+      http://localhost:3000/news.xml?assigned_to=me].each do |link|
+          resp = HTTParty.get(link)
+          #@doc = Nokogiri::HTML(resp.body)
+          #puts @doc.at('body')
+
+          if link == 'http://localhost:3000/news.xml?assigned_to=me' 
+           doc = Nokogiri::XML(resp.body)
+           news = doc.xpath("/news/news") #parent node
+           @news = [] 
+           news.each do |news|
+             @news << News.new()
+             # children node
+             #@id = news.xpath("./id").text
+             #@project = news.xpath("./project/@id/@name")
+             #@author =  news.xpath("./author/@name")
+            # @title = news.xpath("./title")
+             #@summary = news.xpath("./summary")
+            # @description = news.xpath("./description")
+           #  @created_on = news.xpath("./created_on")
+          end
+
+          else link == 'http://localhost:3000/issues.xml?assigned_to=me'
+           @doc2 = Nokogiri::XML(resp.body)
+           @issues = @doc2.xpath("/issues/issue") #parent node 
+           
+           @subject = @issues.xpath("./subject")
+            
+          
+          end
+    end
+  end
+end

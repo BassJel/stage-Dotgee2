@@ -1,0 +1,19 @@
+require 'Nokogiri'
+
+class New
+
+  def initialize(attributes = {})
+    
+    doc = Nokogiri::XML('http://localhost:3000/news.xml?assigned_to=me')
+    news = doc.xpath("/news/news")
+
+    @id = news.xpath("./id")
+    @project = news.xpath("./project/@id/@name")
+    @author =  news.xpath("./author/@name")
+    @title = news.xpath("./title")
+    @summary = news.xpath("./summary")
+    @description = news.xpath("./description")
+    @created_on = news.xpath("./created_on")
+  end
+
+end

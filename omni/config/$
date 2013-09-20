@@ -1,0 +1,9 @@
+Omni::Application.routes.draw do
+  get "/auth/:provider/callback" => 'sessions#home' 
+  
+  #get "/issues.xml" => "issues#new"
+  
+  resources :sessions
+  
+  root :to => "sessions#index"
+end
